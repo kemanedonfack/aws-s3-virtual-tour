@@ -82,3 +82,81 @@ Your S3 Bucket has been created successfully.
 ![Recent](./images/18.png)
 
 
+## Step 3: Importing 3D Vista Files to AWS S3
+
+In the S3 bucket you just created, click on the "**upload**" button.
+
+![Recent](./images/19.png)
+
+Next, in the new window, click on "**Add folder**".
+
+![Recent](./images/20.png)
+
+In the next window that appears, select the folder previously exported from 3D Vista. In my case, it was "**AWS-S3-Virtual-tours**". Then, click on "import".
+
+![Recent](./images/21.png)
+
+Scroll down and click on "**Upload**". After a few seconds, you will see the following message:
+
+![Recent](./images/22.png)
+
+The import is now successfully completed.
+
+## Step 4: Configuring the S3 Bucket
+
+In your bucket, click on the tab "**properties**".
+
+![Recent](./images/23.png)
+
+In the "**properties**" tab, scroll down to the section "**Static website hosting**" and click on "**Edit**".
+
+![Recent](./images/24.png)
+
+In the next page, enable static website hosting, and at the bottom, enter `index.html` for the index document.
+
+![Recent](./images/25.png)
+
+Then, scroll down to the bottom and click on the "**save changes**" button.
+
+Next, go to the tab "**Permissions**". You should have the following configuration:
+
+![Recent](./images/26.png)
+
+Then, go to the section "**Bucket policy**" and click on the "**Edit**" button. Replace **virtual-tours-aws-s3-test** with the name of your S3 bucket in the code below:
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::virtual-tours-aws-s3-test/*"
+        }
+    ]
+}
+```
+then paste it here 
+
+![Recent](./images/27.png)
+
+Scroll down to the bottom and click on the "**save changes**" button. Once saved, you will see this:
+
+![Recent](./images/28.png)
+
+Go back to the "**Objects**" tab and open your 3D Vista project.
+
+![Recent](./images/29.png)
+
+Click on your object `index.htm`. On the new page, copy the URL of the object from the bottom right.
+
+![Recent](./images/30.png)
+
+Paste the URL of the object into your web browser.
+
+![Recent](./images/31.png)
+
+Congratulations, it's working!
+
